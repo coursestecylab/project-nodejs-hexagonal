@@ -28,7 +28,7 @@ export const lambdaHandler = async (
   } catch (error: unknown) {
     console.error(error);
     const errorMessage =
-      error instanceof Error ? error.message : "An unexpected error occurred";
+      error instanceof Error ? error.message : "An unexpected error occurred.";
     response = {
       statusCode: 400,
       body: JSON.stringify({ error: errorMessage }),

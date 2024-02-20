@@ -19,7 +19,7 @@ router.post("/authenticate", async (req: Request, res: Response) => {
     res.status(200).json({ token });
   } catch (error) {
     const errorMessage =
-      error instanceof Error ? error.message : "An unexpected error occurred";
+      error instanceof Error ? error.message : "An unexpected error occurred.";
     res.status(400).json({ error: errorMessage });
   }
 });
