@@ -15,28 +15,26 @@ Globals:
     LoggingConfig:
       LogFormat: JSON
 Resources:
-  EmployeeFunction:
+  SendFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./
-      Handler: server.lambdaHandler
-      Runtime: nodejs16.x
-      Architectures:
-      - x86_64
+      Handler: handlers/handlerSendAdapter.main
+      Runtime: nodejs20.x
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /employee
-            Method: post
+            Path: /send
+            Method: get
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
         Minify: true
         Target: es2020
-        # Sourcemap: true # Enabling source maps will create the required NODE_OPTIONS environment variables on your lambda function during sam build
+        Sourcemap: true
         EntryPoints:
-        - server.ts
+        - handlers/handlerSendAdapter.ts
 
 
 Outputs:
@@ -46,9 +44,9 @@ Outputs:
   EmployeeApi:
     Description: API Gateway endpoint URL for Prod stage for Employee function
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/hr/"
-  EmployeeFunction:
+  SendFunction:
     Description: Employee Lambda Function ARN
-    Value: !GetAtt EmployeeFunction.Arn
-  HEmployeeFunctionIamRole:
+    Value: !GetAtt SendFunction.Arn
+  SendFunctionIamRole:
     Description: Implicit IAM Role created for Employee function
-    Value: !GetAtt EmployeeFunctionRole.Arn
+    Value: !GetAtt SendFunctionRole.Arn
