@@ -18,6 +18,8 @@ export const main = middy(async (event, context) => {
 
   await sendCreation.sendEmployee(employeModel);
 
+  console.log(employeModel);
+
   console.log("procesando el envío");
 
   return { status: 200 };
