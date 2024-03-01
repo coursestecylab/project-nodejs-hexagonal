@@ -11,7 +11,7 @@ export const main = middy(async (event, context) => {
     id: 1,
     firstName: "Juan",
     lastName: "Pérez",
-    age: 30,
+    age: 35,
     position: "Desarrollador",
     salary: 50000,
   };
